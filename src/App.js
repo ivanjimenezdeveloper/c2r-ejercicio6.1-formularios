@@ -34,6 +34,8 @@ function App() {
     }
     setPaso(paso - 1);
   };
+
+  const datosCompletos = { datosPersonales, datosRegistro, datosAcceso };
   return (
     <>
       <header>
@@ -41,13 +43,18 @@ function App() {
       </header>
       <div className="contenedor">
         {paso === 1 && (
-          <Paso1 avanzaPaso={avanzaPaso} datosPersonales={datosPersonales} />
+          <Paso1
+            avanzaPaso={avanzaPaso}
+            datosPersonales={datosPersonales}
+            setDatosPersonales={setDatosPersonales}
+          />
         )}
         {paso === 2 && (
           <Paso2
             avanzaPaso={avanzaPaso}
             datosRegistro={datosRegistro}
             retrocedePaso={retrocedePaso}
+            setDatosRegistro={setDatosRegistro}
           />
         )}
         {paso === 3 && (
@@ -55,9 +62,12 @@ function App() {
             datosAcceso={datosAcceso}
             avanzaPaso={avanzaPaso}
             retrocedePaso={retrocedePaso}
+            setDatosAcceso={setDatosAcceso}
           />
         )}
-        {paso === 4 && <Resumen retrocedePaso={retrocedePaso} />}
+        {paso === 4 && (
+          <Resumen retrocedePaso={retrocedePaso} datos={datosCompletos} />
+        )}
       </div>
     </>
   );

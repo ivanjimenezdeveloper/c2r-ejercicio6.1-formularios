@@ -2,19 +2,22 @@ import PropTypes from "prop-types";
 import { useFormulario } from "../hooks/useFormulario";
 
 export const Paso1 = (props) => {
-  const { datosPersonales, avanzaPaso } = props;
+  const { datosPersonales, avanzaPaso, setDatosPersonales } = props;
   const {
+    datos,
     datos: { nombre, apellidos, fechaNacimiento, email },
     setDato,
   } = useFormulario(datosPersonales);
-  const enviaPaso = (e) => {
+
+  const enviaPaso = (e, datos) => {
     e.preventDefault();
+    setDatosPersonales({ ...datos });
     avanzaPaso();
   };
   return (
     <>
       <h2>Paso 1: Datos personales</h2>
-      <form noValidate onSubmit={enviaPaso}>
+      <form noValidate onSubmit={(e) => enviaPaso(e, datos)}>
         <div className="form-group">
           <label htmlFor="nombre">Nombre:</label>
           <input
